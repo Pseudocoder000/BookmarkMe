@@ -111,14 +111,18 @@ const Home = () => {
   const categories = ['All', 'Development', 'Learning', 'Technology', 'Design', 'Writing', 'Reading'];
 
   const filteredBookmarks = useMemo(() => {
-    return demoBookmarks.filter(bookmark => {
-      const matchesSearch = bookmark.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           bookmark.url.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           bookmark.description.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesCategory = selectedCategory === 'All' || bookmark.category === selectedCategory;
-      return matchesSearch && matchesCategory;
-    });
-  }, [searchTerm, selectedCategory]);
+  return demoBookmarks.filter(bookmark => {
+    const matchesSearch =
+      bookmark.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      bookmark.url.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      bookmark.description.toLowerCase().includes(searchTerm.toLowerCase());
+
+    const matchesCategory =
+      selectedCategory === 'All' || bookmark.category === selectedCategory;
+
+    return matchesSearch && matchesCategory;
+  });
+}, [searchTerm, selectedCategory, demoBookmarks]);
 
   const toggleBookmark = (id) => {
     const newBookmarked = new Set(bookmarkedIds);
